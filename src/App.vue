@@ -159,30 +159,52 @@ export default {
 
 <style>
 
+body{
+  background-color: rgb(245, 255, 245);
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 30px;
+  margin: 60px;
   display: flex;
   
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+.form{
+  width: 20vw;
+  padding: 30px;
+  height: 70vh;
+  background-color: rgb(210, 236, 202);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .form-group{
   padding: .6rem;
   text-align: left;
-  width: 200px;
+  width: 100%;
 }
 
 input{
     padding: .4rem;
     border: 1px solid rgb(206, 206, 206);
     border-radius: 4px;
-    width: 100%;
+    width: calc(100% - 30px);
 }
 
 button{

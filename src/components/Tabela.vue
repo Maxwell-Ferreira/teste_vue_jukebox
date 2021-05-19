@@ -43,9 +43,21 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+  .tabela{
+    background-color: rgb(210, 236, 202);
+    padding: 30px;
+    width: 55vw;
+    height: 70vh;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+  }
+
   table{
     border-spacing: 0;
-    max-width: 800px;
+    width: 100%;
   }
 
   th{
@@ -58,11 +70,13 @@ export default {
   td{
     margin: 0;
     padding: .6rem;
+    background-color: #fff;
     border: 1px solid rgb(185, 185, 185);
     border-spacing: 0;
   }
 
   .btn{
+    margin: 0 5px;
     padding: .5rem 1rem;
     border: none;
     border-radius: 5px;
@@ -70,21 +84,21 @@ export default {
   }
 
   .btn-excluir{
-    background-color: red;
+    background-color: rgb(255, 75, 75);
     color: #fff;
     
   }
   .btn-excluir:hover{
-    background-color: rgb(173, 16, 16);
+    background-color: rgb(228, 40, 40);
   }
 
   .btn-editar{
-    background-color: rgb(235, 238, 38);
+    background-color: rgb(255, 231, 93);
     color: #000;
   }
 
   .btn-editar:hover{
-    background-color: rgb(153, 172, 45);
+    background-color: rgb(224, 203, 80);
     color: #000;
   }
 </style>
