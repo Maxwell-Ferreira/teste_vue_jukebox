@@ -12,8 +12,8 @@
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody v-for="(pessoa, index) in pessoas" :key="index">
-        <tr>
+      <tbody>
+        <tr v-for="(pessoa, index) in pessoas" :key="index">
           <td>{{pessoa.nomeCompleto}}</td>
           <td>{{pessoa.email}}</td>
           <td>{{pessoa.telefone}}</td>
@@ -73,6 +73,8 @@ export default {
     background-color: #fff;
     border: 1px solid rgb(185, 185, 185);
     border-spacing: 0;
+    animation: tdAnimation 1s;
+    overflow: hidden;
   }
 
   .btn{
@@ -101,4 +103,17 @@ export default {
     background-color: rgb(224, 203, 80);
     color: #000;
   }
+
+  @keyframes tdAnimation {
+    0% {
+      transform: translateY(-1.2rem);
+    }
+    40% {
+      transform: translateY(-1.2rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
 </style>
