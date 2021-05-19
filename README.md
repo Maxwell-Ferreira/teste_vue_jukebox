@@ -1,24 +1,15 @@
 # teste-vue-jukebox
 
-## Project setup
+Projeto em VueJS criado para teste realizado na segunda fase do processo seletivo para a vaga de desenvolvedor Back-end na Jukebox.
+
+1 - Clone este repositório!
+
+### Instalando as dependências
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Subindo o servidor
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

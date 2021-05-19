@@ -1,26 +1,148 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="form">
+    <h1>Cadastro de pessoa</h1>
+    <form action="">
+      <div class="form-group">
+        <label for="">Nome</label><br/>
+        <input type="text" id="nome" v-model="pessoa.nome">
+      </div>
+      <div class="form-group">
+        <label for="">Sobrenome</label><br/>
+        <input type="text" id="sobrenome"  v-model="pessoa.sobrenome">
+      </div>
+      <div class="form-group">
+        <label for="">Email</label><br/>
+        <input type="email" id="email" v-model="pessoa.email">
+      </div>
+      <div class="form-group">
+        <label for="">Telefone</label><br/>
+        <input type="text" id="telefone" v-model="pessoa.telefone">
+      </div>
+      <div class="form-group">
+        <label for="" style="margin-right: 6px">Pessoa Juridica?</label>
+        <input type="checkbox" id="sobrenome" v-model="pessoaJuridica">
+      </div>
+      <div v-if="!pessoa.pessoaJuridicaTrigger" class="form-group">
+        <label for="">CPF</label><br/>
+        <input type="text" id="cpf" v-model="pessoa.cpf">
+      </div>
+      <div v-else class="form-group">
+        <label for="">CNPJ</label><br/>
+        <input type="text" id="cnpj" v-model="pessoa.cnpj">
+      </div>
+      <div class="form-group">
+        <button @click="submitForm">Salvar pessoa</button>
+      </div>
+    </form>
+  </div>
+  <Tabela :pessoas="pessoas" :excluirPessoa="(index) => excluirPessoa(index)"/>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Tabela from "./components/Tabela.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    Tabela,
   },
+  data(){
+    return {
+      pessoas: [],
+      pessoa:{
+        nome: "",
+        sobrenome: "",
+        email: "",
+        telefone: "",
+        pessoaJuridica: false,
+        pessoaJuridicaTrigger: false,
+        cpf: "",
+        cnpj: ""
+      },
+      pessoaJuridica: false
+    }
+  },
+  watch: {
+    pessoaJuridica(){
+      this.pessoa.pessoaJuridicaTrigger = this.pessoa.pessoaJuridicaTrigger ? false : true
+    }
+  },
+  computed: {
+    nomeCompleto(){
+      return `${this.pessoa.nome} ${this.pessoa.sobrenome}`;
+    }
+  },
+  methods: {
+    submitForm(e){
+      e.preventDefault();
+
+      let novaPessoa = {
+        nomeCompleto: this.nomeCompleto,
+        ...this.pessoa
+      }
+
+      this.pessoas.push(novaPessoa);
+      
+      let persistPessoaJuridica = this.pessoaJuridica;
+      this.pessoa = {
+        nome: "",
+        sobrenome: "",
+        email: "",
+        telefone: "",
+        pessoaJuridica: false,
+        pessoaJuridicaTrigger: persistPessoaJuridica,
+        cpf: "",
+        cnpj: ""
+      }
+    },
+
+    excluirPessoa(index){
+      this.pessoas.splice(index, 1);
+    }
+  }
 };
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
+  display: flex;
+  
+  align-items: flex-start;
+  justify-content: space-around;
 }
+
+.form-group{
+  padding: .6rem;
+  text-align: left;
+  width: 200px;
+}
+
+input{
+    padding: .4rem;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 4px;
+    width: 100%;
+}
+
+button{
+  background-color: rgb(58, 64, 151);
+  color: #fff;
+  padding: .5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: rgb(41, 45, 105);
+}
+
+
 </style>
