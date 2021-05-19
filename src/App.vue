@@ -136,6 +136,10 @@ export default {
     },
 
     editarPessoa(index){
+      var dados = {...this.pessoas[index]};
+      delete dados.nomeCompleto;
+      this.pessoa = dados;
+      
       this.pessoaEditada = index;
       this.editar = !this.editar;
     }
