@@ -1,6 +1,7 @@
 <template>
   <div class="form">
-    <h1>Cadastro de pessoa</h1>
+    <h1 v-if="!editar">Cadastro de pessoa</h1>
+    <h1 v-else>Editar pessoa</h1>
     <form action="">
       <div class="form-group">
         <label for="">Nome</label><br/>
@@ -30,12 +31,19 @@
         <label for="">CNPJ</label><br/>
         <input type="text" id="cnpj" v-model="pessoa.cnpj">
       </div>
-      <div class="form-group">
-        <button @click="submitForm">Salvar pessoa</button>
+      <div v-if="!editar" class="form-group">
+        <button @click="cadastrarPessoa">Cadastrar pessoa</button>
+      </div>
+      <div v-else class="form-group">
+        <button @click="salvarPessoa">Salvar pessoa</button>
       </div>
     </form>
   </div>
-  <Tabela :pessoas="pessoas" :excluirPessoa="(index) => excluirPessoa(index)"/>
+  <Tabela 
+    :pessoas="pessoas" 
+    :excluirPessoa="(index) => excluirPessoa(index)"
+    :editarPessoa="(index) => editarPessoa(index)"
+  />
 </template>
 
 <script>
@@ -48,6 +56,8 @@ export default {
   },
   data(){
     return {
+      editar: false,
+      pessoaEditada: 0,
       pessoas: [],
       pessoa:{
         nome: "",
@@ -73,7 +83,7 @@ export default {
     }
   },
   methods: {
-    submitForm(e){
+    cadastrarPessoa(e){
       e.preventDefault();
 
       let novaPessoa = {
@@ -98,6 +108,36 @@ export default {
 
     excluirPessoa(index){
       this.pessoas.splice(index, 1);
+    },
+
+    salvarPessoa(e){
+      e.preventDefault();
+
+      let novosDados = {
+        nomeCompleto: this.nomeCompleto,
+        ...this.pessoa
+      }
+
+      this.pessoas[this.pessoaEditada] = novosDados;
+
+      let persistPessoaJuridica = this.pessoaJuridica;
+      this.pessoa = {
+        nome: "",
+        sobrenome: "",
+        email: "",
+        telefone: "",
+        pessoaJuridica: false,
+        pessoaJuridicaTrigger: persistPessoaJuridica,
+        cpf: "",
+        cnpj: ""
+      }
+
+      this.editar = false;
+    },
+
+    editarPessoa(index){
+      this.pessoaEditada = index;
+      this.editar = !this.editar;
     }
   }
 };
