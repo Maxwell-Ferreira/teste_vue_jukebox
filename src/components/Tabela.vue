@@ -73,7 +73,7 @@ export default {
     background-color: #fff;
     border: 1px solid rgb(185, 185, 185);
     border-spacing: 0;
-    animation: tdAnimation 1s;
+    animation: tdAnimation .2s;
     overflow: hidden;
   }
 
@@ -106,13 +106,12 @@ export default {
 
   @keyframes tdAnimation {
     0% {
-      transform: translateY(-1.2rem);
-    }
-    40% {
-      transform: translateY(-1.2rem);
+      transform: scaleY(0);
+      transform-origin: 100% 0%;
     }
     100% {
-      transform: translateY(0);
+      transform: scaleY(1);
+      transform-origin: 100% 0%;
     }
   }
 
