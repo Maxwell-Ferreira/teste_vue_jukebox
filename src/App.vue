@@ -21,7 +21,7 @@
       </div>
       <div class="form-group">
         <label for="" style="margin-right: 6px">Pessoa Juridica?</label>
-        <input type="checkbox" id="sobrenome" v-model="pessoaJuridica">
+        <input type="checkbox" id="pessoaJuridica" v-model="pessoaJuridica">
       </div>
       <div v-if="!pessoa.pessoaJuridicaTrigger" class="form-group">
         <label for="">CPF</label><br/>
@@ -64,7 +64,6 @@ export default {
         sobrenome: "",
         email: "",
         telefone: "",
-        pessoaJuridica: false,
         pessoaJuridicaTrigger: false,
         cpf: "",
         cnpj: ""
@@ -74,7 +73,12 @@ export default {
   },
   watch: {
     pessoaJuridica(){
-      this.pessoa.pessoaJuridicaTrigger = this.pessoa.pessoaJuridicaTrigger ? false : true
+      if(this.pessoa.pessoaJuridicaTrigger){
+        this.pessoa.cpf = "";
+      }else{
+        this.pessoa.cnpj = "";
+      }
+      this.pessoa.pessoaJuridicaTrigger = !this.pessoa.pessoaJuridicaTrigger;
     }
   },
   computed: {
@@ -116,6 +120,12 @@ export default {
       let novosDados = {
         nomeCompleto: this.nomeCompleto,
         ...this.pessoa
+      }
+
+      if(novosDados.pessoaJuridicaTrigger){
+        novosDados.cpf = "";
+      }else{
+        novosDados.cnpj = "";
       }
 
       this.pessoas[this.pessoaEditada] = novosDados;
